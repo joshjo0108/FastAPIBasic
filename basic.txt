@@ -1,0 +1,10 @@
+1. uvicorn main:app --reload
+2. pip install "fastapi[all]"
+2. pip install fastapi
+3. pip install "uvicorn[standard]"
+
+# CHECK ON
+  1. http://127.0.0.1:8000
+  2. http://127.0.0.1:8000/docs
+  # Fastapi automatically generates JSON (schema)
+  3. http://127.0.0.1:8000/openapi.json
