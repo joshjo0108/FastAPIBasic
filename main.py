@@ -1,5 +1,12 @@
+from enum import Enum
+
 # "FastAPI" PROVIDES ALL THE FUNCTIONALITY FOR YOUR API
 from fastapi import FastAPI
+
+class ModelName(str, Enum):
+  alexnet = "alexnet"
+  resnet = "resnet"
+  lenet = "lenet"
 
 # CREATING AN INSTANCE OF THE CLASS "FastAPI"
 # "app" IN "uvicorn main:app --reload" USED AS A VARIABLE
@@ -21,3 +28,16 @@ async def read_item(item_id: int):
   # ex) results = "await" some_library()
   # return results
   return {"item_id": item_id}
+
+@app.get("/model/{model_name}")
+async def get_model(model_name: ModelName):
+  if model_name == ModelName.alexnet:
+    return {"model_name": model_name, "message": "Deep Learning FTW!"}
+  # COULD ALSO ACCESS VIA USING "mdoel_name.lenet.value"
+  if model_name.value == "lenet":
+    return {"model_name": model_name, "message": "LeCNN all the images"}
+  return {"model_name": model_name, "message": "Have some residual"}
+
+@app.get("/files/{file_path:path}")
+async def read_file(file_path: str):
+  return {"file_path" : file_path}
